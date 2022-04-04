@@ -6,16 +6,19 @@ const IS_PART_TIME = 1;
 const WAGE_PER_HR = 20;
 const FULL_DAY_HOURS = 8;
 const PART_TIME_HOURS = 4;
-const WORKING_DAY_PER_MONTH = 20;
+const MAX_WORKING_DAY_PER_MONTH = 20;
+const MAX_WORKING_HRS_PER_MONTH = 100;
 
 //Variables
 let monthlyEmpWage = 0;
-let empWage =0;
-for(let i = 1; i <= WORKING_DAY_PER_MONTH;i++){
-    empWage = WAGE_PER_HR * GetWorkingHrs();
-    monthlyEmpWage += empWage;
+let totalWorkingHrs = 0;
+let totalWorkingDays = 0;
+while(totalWorkingDays < MAX_WORKING_DAY_PER_MONTH && totalWorkingHrs < MAX_WORKING_HRS_PER_MONTH){
+    totalWorkingHrs += GetWorkingHrs();
+    totalWorkingDays++;
 }
-console.log("Employee wage for this month is "+ monthlyEmpWage);
+monthlyEmpWage = WAGE_PER_HR * totalWorkingHrs;
+console.log("Employee wage for this month is "+ monthlyEmpWage+ " Total hrs & days worked are "+totalWorkingHrs+ ", "+totalWorkingDays);
 
 //Method to get Work Hours
 function GetWorkingHrs(){
