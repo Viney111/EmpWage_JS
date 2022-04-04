@@ -11,14 +11,25 @@ const MAX_WORKING_HRS_PER_MONTH = 100;
 
 //Variables
 let monthlyEmpWage = 0;
+let dailyWorkingHrs = 0;
 let totalWorkingHrs = 0;
 let totalWorkingDays = 0;
+//Daily EmpWage in Array
+let dailyEmpWageArray = new Array();
+//Daily EmpWage in Map
+let dailyEmpWageMap = new Map();
+
 while(totalWorkingDays < MAX_WORKING_DAY_PER_MONTH && totalWorkingHrs < MAX_WORKING_HRS_PER_MONTH){
-    totalWorkingHrs += GetWorkingHrs();
+    dailyWorkingHrs = GetWorkingHrs();
+    dailyEmpWageArray.push(GetDailyWage(dailyWorkingHrs));
+    totalWorkingHrs += dailyWorkingHrs;
     totalWorkingDays++;
+    dailyEmpWageMap.set("Day No :"+ totalWorkingDays,"Wage is " + GetDailyWage(dailyWorkingHrs));
 }
 monthlyEmpWage = WAGE_PER_HR * totalWorkingHrs;
 console.log("Employee wage for this month is "+ monthlyEmpWage+ " Total hrs & days worked are "+totalWorkingHrs+ ", "+totalWorkingDays);
+console.log("DailyEmpWage =" +dailyEmpWageArray);
+console.log(dailyEmpWageMap);
 
 //Method to get Work Hours
 function GetWorkingHrs(){
@@ -35,4 +46,7 @@ function GetWorkingHrs(){
             return FULL_DAY_HOURS;
             break;
     }
+}
+function GetDailyWage(dailyWorkingHrs){
+    return dailyWorkingHrs * WAGE_PER_HR;
 }
