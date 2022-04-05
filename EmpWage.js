@@ -79,7 +79,27 @@ function NoOfDaysEmployeePresentOrPartTime(numOfDays,dailyWage){
 }
 console.log("UC7G:- No of days employee present or part time: "+dailyEmpWageArray.reduce(NoOfDaysEmployeePresentOrPartTime,0));
 
-//Method to get Work Hours
+//UC9A
+const findTotal = (totalvalue,dailyvalue) =>{
+    return totalvalue+dailyvalue;
+}
+let count = 0;
+let totalSalary = dailyEmpWageArray.filter(dailyWage => dailyWage > 0).reduce(findTotal,0);
+console.log("UC9A: EmpWage with Arrow : "+ " Total Wages: "+ totalSalary);
+
+//UC9B
+let nonWorkingDays = new Array();
+let noOfPartTimeDays = new Array();
+let noOfFullTimeDays = new Array();
+dailyEmpWageMap.forEach((value,key,map) => {
+    if (value == 160) noOfFullTimeDays.push(key);
+    else if (value == 80) noOfPartTimeDays.push(key);
+    else nonWorkingDays.push(key);
+})
+console.log("Full working days are : "+ noOfFullTimeDays);
+console.log("Part Time  Working days are : "+ noOfPartTimeDays);
+console.log("Non Working days are : "+nonWorkingDays);
+//Method to get Work Hours  
 function GetWorkingHrs(){
     let empCheck;
     empCheck = Math.floor(Math.random() * 10) % 3;
